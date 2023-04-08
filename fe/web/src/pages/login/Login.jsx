@@ -1,43 +1,39 @@
 import React, {useEffect, useState} from 'react';
 import logo from "../../img/png/logo-no-background.png";
 import Navbar from '../../components/Navbar';
+import { Navigate } from 'react-router';
 import axios from "axios";
+
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [err, setErr] = useState(false);
+    const [token, setToken] = useState("");
 
     const handleEmail = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
         setEmail(e.target.value);
     }
 
     const handlePassword = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
         setPassword(e.target.value);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email + " | " + password);
-        let res = await fetch("http://127.0.0.1:3001/auth/login", {
-            method: "POST", 
-            body: {
-                email: email,
-                password: password
-            }
+        let res = await axios.post("http://127.0.0.1:3001/auth/login", {
+            email: email,
+            password: password
         })
-        let data = await res.json();
-        if(data.statusCode !== 200)
+        let data = await res.data;
+        console.log(data)
+        if(!data.success)
             setErr(true);
-    } 
-
-    useEffect(() => {
-        handleSubmit();
-    }, [])
+        localStorage.setItem("token", data.data.token);
+        setToken(data.data.token);
+    }
 
     return (
         <div> 
@@ -128,6 +124,7 @@ function Login() {
                     </div>
                 </div>
             </section>
+            {token && <Navigate to="/" replace={true} />}
         </div>
   )
 }
