@@ -63,8 +63,8 @@ class _CardPageState extends State<CardPage> {
               controller: controller,
               children: List.generate(cardLists.length, (index) {
                 return getCards(
-                   cardLists[index]['amount'],
-                    cardLists[index]['currency'],
+                  cardLists[index]['amount'],
+                  cardLists[index]['currency'],
                   cardLists[index]['card_number'],
                   cardLists[index]['valid_date'],
                   cardLists[index]['bg_color'],

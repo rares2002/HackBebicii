@@ -1,6 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class User {
   String name, phone, email, id;
@@ -9,13 +9,13 @@ class User {
   @protected
   static User? _user;
 
-  User._({
-    this.jwt,
-    required this.name,
-    required this.id,
-    required this.email,
-    required this.phone,
-  });
+  User._(
+      {this.jwt,
+      required this.name,
+      required this.id,
+      required this.email,
+      required this.phone,
+      });
 
   String getJWT() {
     return jwt ?? "";
@@ -23,8 +23,6 @@ class User {
 
   static Future<User> getUserInstance() async {
     // _user ?? = await getUserFromSP();
-    print(_user);
-
     return Future.value(_user);
   }
 
@@ -57,6 +55,7 @@ class User {
   factory User.fromJSON(Map<String, dynamic> json) {
     // subject to change depending on /api/getUser response
     var user = User._(
+      
       email: json['email'],
       name: json['name'],
       id: json['_id'],
