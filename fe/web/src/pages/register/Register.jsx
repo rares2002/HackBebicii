@@ -43,7 +43,8 @@ function Login() {
         let data = await res.data;
         if(data.status !== 200)
             setErr(true);
-        
+
+        window.location.href('/login');
     }
 
     return (
