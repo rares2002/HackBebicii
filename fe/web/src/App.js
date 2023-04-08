@@ -6,6 +6,7 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register'
 import Logout from "./pages/Logout/Logout";
 import Forum from "./pages/forum/Forum";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const [token, setToken] = useState("");
@@ -26,6 +27,7 @@ function App() {
           {!token && <Route path='/register' element={<Register />} />}
           {token && <Route path='/logout' element={<Logout />} />}
           {token && <Route path="/forum" element={<Forum />} />}
+          {token && <Route path="/profile" element={<Profile />} />}
         </Routes>
       </BrowserRouter>
   );
