@@ -39,29 +39,29 @@ async function bootstrap() {
     }),
   );
 
-  const serviceAccount = serviceAccountCredentials as admin.ServiceAccount;
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-    })
+  // const serviceAccount = serviceAccountCredentials as admin.ServiceAccount;
+  // admin.initializeApp({
+  //   credential: admin.credential.cert(serviceAccount)
+  //   })
   
-  const FCM = new fcm(serviceAccount);
-  let message = {
-    android: {
-        notification: {
-            title: "Ana",
-            body: "test",
-        },
-    },
-    token: "anaaaa"
-  };
-  try {
-    FCM.send(message, (err, resp) => {
-      if (err) throw err;
-      console.log("Successfully sent");
-    })
-  } catch(err) {
-    console.log(err);
-  }
+  // const FCM = new fcm(serviceAccount);
+  // let message = {
+  //   android: {
+  //       notification: {
+  //           title: "Ana",
+  //           body: "test",
+  //       },
+  //   },
+  //   token: "anaaaa"
+  // };
+  // try {
+  //   FCM.send(message, (err, resp) => {
+  //     if (err) throw err;
+  //     console.log("Successfully sent");
+  //   })
+  // } catch(err) {
+  //   console.log(err);
+  // }
   await app.listen(process.env.PORT);
   
  

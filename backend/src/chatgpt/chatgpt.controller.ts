@@ -1,14 +1,15 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ChatgptService } from './chatgpt.service';
+import { ChatGPTDto } from './dto/chatgpt.dto';
 
 @Controller('chatgpt')
 export class ChatgptController {
   constructor(private readonly chatgptService: ChatgptService) { }
   
-  @Get(':text')
+  @Post()
   chatgpt(
-    @Param('text') text: string
+    @Body() ChatGPTDto: ChatGPTDto,
   ) {
-    return this.chatgptService.sendMessage(text);
+    return this.chatgptService.sendMessage(ChatGPTDto);
   }
 }

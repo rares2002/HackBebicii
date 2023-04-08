@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
+import { ChatGPTDto } from './dto/chatgpt.dto';
 import { OpenAIApi, Configuration } from 'openai';
 @Injectable()
 export class ChatgptService {
@@ -9,15 +10,14 @@ export class ChatgptService {
         }))
     }
 
-    async sendMessage(text: string) {
+    async sendMessage(ChatGPTDto: ChatGPTDto) {
         // return "Hello World";
         try {
-            console.log(this.openai)
             const response = await this.openai.createChatCompletion({
                 model: 'gpt-3.5-turbo',
                 messages: [{
                     role: 'system',
-                    content: "You are a finance trainer for students who are in need of advice for how to handle their finances and budgets better. Provide useful information fot the following questions."
+                    content: "You are a finance trainer for students who are in need of advice for how to handle their finances and budgets better. Provide useful information fot the following questions. If the questions is not about finances, respond with 'I don't know' and don't say anything else."
                 },
                 {
                     role: 'user',
@@ -29,9 +29,10 @@ export class ChatgptService {
                 },
                 {
                     role: 'user',
-                    content: text
-                }],
-                // temperature: 0.9
+                    content: ChatGPTDto.text
+                    }],
+                max_tokens: 100,
+                temperature: 0.9
             })
             return response.data;
         }
