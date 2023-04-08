@@ -4,9 +4,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ChatgptModule } from './chatgpt/chatgpt.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { CronjobModule } from './cronjob/cronjob.module';
+import { CardModule } from './card/card.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, ChatgptModule, SubscriptionsModule, CronjobModule],
+  imports: [PrismaModule, AuthModule, ChatgptModule, SubscriptionsModule, CronjobModule, CardModule],
   controllers: [],
   providers: [],
 })
