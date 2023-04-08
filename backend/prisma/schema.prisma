@@ -20,10 +20,19 @@ model User {
   telephone     String               @unique
   amount        Int                  @default(0)
   subscriptions SubscriptionOnUser[]
-  achievements  AchievenemtOnUser[]
+  achievements  AchievementOnUser[]
   cards         String?              @db.Text
   createdAt     DateTime             @default(now())
   updatedAt     DateTime             @updatedAt
+}
+
+model Achievement {
+  id        Int                 @id @default(autoincrement())
+  name      String
+  reward    String
+  user      AchievementOnUser[]
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
 }
 
 model Subscription {
@@ -36,22 +45,14 @@ model Subscription {
   updatedAt   DateTime             @updatedAt
 }
 
-model Achievenemt {
-  id        Int                 @id @default(autoincrement())
-  name      String
-  points    Int
-  user      AchievenemtOnUser[]
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
-}
+model AchievementOnUser {
+  id             Int         @id @default(autoincrement())
+  user_id        Int
+  user           User        @relation(fields: [user_id], references: [id])
+  achievement_id Int
+  achievement    Achievement @relation(fields: [achievement_id], references: [id])
 
-model AchievenemtOnUser {
-  id      Int  @id @default(autoincrement())
-  user_id Int
-  user    User @relation(fields: [user_id], references: [id])
-
-  achievenemt_id Int
-  achievenemt    Achievenemt @relation(fields: [achievenemt_id], references: [id])
+  
 }
 
 model SubscriptionOnUser {
