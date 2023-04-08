@@ -4,7 +4,6 @@ import Navbar from '../../components/Navbar';
 import { Navigate } from 'react-router';
 import axios from "axios";
 
-
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
