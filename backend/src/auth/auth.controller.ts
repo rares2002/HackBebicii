@@ -1,7 +1,8 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, Get } from '@nestjs/common';
 // import { Role } from '@prisma/client';
+import { UserGuard } from './guards/user.guard';
 import { AuthService } from './auth.service';
-// import { Auth } from './decorators/auth.decorator';
+import { Auth } from './decorators/auth.decorator';
 import { LoginUserDto } from './dtos/login-user.dto';
 import { RegisterUserDto } from './dtos/register-user.dto';
 
@@ -18,5 +19,11 @@ export class AuthController {
   @Post('login')
   login(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
+  }
+
+  @Get('profile')
+  @Auth()
+  getProfile(@UserGuard() user: any) {
+    return this.authService.getProfile(user);
   }
 }
