@@ -1,19 +1,22 @@
 import 'package:banking_app/data_json/balance_json.dart';
+import 'package:banking_app/pages/SettingPage.dart';
 import 'package:banking_app/pages/add_page.dart';
 import 'package:banking_app/pages/card_page.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:banking_app/pages/SettingPage.dart';
+import 'package:banking_app/models/user.dart';
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
-
+ 
   @override
   State<DashboardPage> createState() => _DashbaordPageState();
 }
 
 class _DashbaordPageState extends State<DashboardPage> {
-  int pageIndex = 0;
-  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +29,7 @@ class _DashbaordPageState extends State<DashboardPage> {
     );
   }
 
+  
   Widget getAppBar() {
     return AppBar(
       elevation: 0,
@@ -36,7 +40,14 @@ class _DashbaordPageState extends State<DashboardPage> {
             backgroundImage: NetworkImage(
                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
           )),
-      actions: [IconButton(onPressed: () {}, icon: Icon(AntDesign.search1))],
+      actions: [
+        IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SettingPage()));
+            },
+            icon: Icon(AntDesign.search1))
+      ],
     );
   }
 
@@ -122,32 +133,30 @@ class _DashbaordPageState extends State<DashboardPage> {
                         width: 15,
                       ),
                       TextButton(
-                        style:  TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          fixedSize: Size(200, 200)
-                          
-                        ),
+                        style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            fixedSize: Size(200, 200)),
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  AddCardPage())),
-                                
-                        child: 
-                        // Flexible(
-                          // child: 
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: secondary.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Center(
-                              child: Text(
-                                "Add card",
-                                style: TextStyle(
-                                    color: white, fontWeight: FontWeight.w500),
-                              ),
+                                builder: (context) => AddCardPage())),
+
+                        child:
+                            // Flexible(
+                            // child:
+                            Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: secondary.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Center(
+                            child: Text(
+                              "Add card",
+                              style: TextStyle(
+                                  color: white, fontWeight: FontWeight.w500),
                             ),
                           ),
+                        ),
                         // ),
                       ),
                       SizedBox(
@@ -381,7 +390,8 @@ class _DashbaordPageState extends State<DashboardPage> {
           ),
           GestureDetector(
             onTap: () {
-             Navigator.push(context, MaterialPageRoute(builder: (_) => CardPage()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => CardPage()));
             },
             child: Container(
               width: double.infinity,

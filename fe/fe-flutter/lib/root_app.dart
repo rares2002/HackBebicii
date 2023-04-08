@@ -1,8 +1,17 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:banking_app/pages/add_page.dart';
 import 'package:banking_app/pages/dashboard_page.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:banking_app/pages/card_flip.dart';
+import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
+
+import 'package:banking_app/utils/Chatgpt.dart';
+import 'package:banking_app/utils/Config.dart';
+import 'package:banking_app/utils/Time.dart';
+import 'package:banking_app/utils/Utils.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
@@ -14,6 +23,7 @@ class RootApp extends StatefulWidget {
 class _RootAppState extends State<RootApp> {
   int pageIndex = 0;
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: white,
@@ -37,31 +47,31 @@ class _RootAppState extends State<RootApp> {
   Widget getBody() {
     return IndexedStack(
       index: pageIndex,
-      children: [
+      children: const [
         DashboardPage(),
         Center(
-          child: Text("Chat Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Chat Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         Center(
-          child: Text("Notification Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Notification Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         Center(
-          child: Text("Account Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Account Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         Center(
-          child: Text("Card Page",style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),),
+          child: Text(
+            "Card Page",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );
@@ -94,6 +104,9 @@ class _RootAppState extends State<RootApp> {
   }
 
   selectedTab(index) {
+    if (index == 3){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CardFlip()));
+    }
     setState(() {
       pageIndex = index;
     });
