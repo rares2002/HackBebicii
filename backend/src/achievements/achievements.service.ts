@@ -18,10 +18,13 @@ export class AchievementsService {
     return this.prisma.achievement.findMany();
   }
 
-  findOne(id: number) {
-    return this.prisma.achievement.findUnique({
+  findMy(id: number) {
+    return this.prisma.achievementOnUser.findMany({
       where: {
-        id: id
+        user_id: id
+      },
+      include: {
+        achievement: true
       }
     });
   }
