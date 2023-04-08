@@ -1,30 +1,33 @@
 import React from 'react'
-import logo from "../../img/png/logo-white.png"
+import logo from "../../img/png/logo-color.png"
 import { Link } from 'react-router-dom'
+import Navbar from '../../components/Navbar'
+import Milica from '../../components/Milica'
 
 function Home() {
   return (
-    <div className="relative flex flex-col content-around  bg-gradient-to-r from-[#06ef68] from-0% to-[#3758d1] to-100% w-[100%] h-[100vh]">
-      <div className='relative flex flex-row-reverse items-center w-[100%] h-[5vh] bg-[#00000050]'>
-        <ul className="relative flex flex-row align-center mr-[5vw] text-white">
-          <Link className="relative flex flex-row justify-center align-center ml-[1.5vw] mr-[1.5vw] hover:bg-[#00000070] h-[5vh]" to="/login">
-            <li>Login</li>
-          </Link>
-          <Link className="relative ml-[1.5vw] mr-[1.5vw]" to="/about">
-            <li>About Us</li>
-          </Link>
-          <Link className="relative ml-[1.5vw] mr-[1.5vw]" to="/contact">
-            <li>Contact</li>
-          </Link>
-        </ul>
-      </div>
-      <div className='relative flex flex-col h-[50vh]'>
-        <div className='relative max-w-[30vw]'>
-          <img src={logo} alt="" />
+    <div className='bg-gradient-to-r from-[#06ef68] from-40% to-[#3758d1] to-100% scroll-smooth'>
+      <Navbar />
+      <div class="h-screen flex justify-center items-center px-6 py-12 md:px-12 text-[#2f4bb0] text-center lg:text-left bg-gradient-to-r from-[#06ef68] from-40% to-[#3758d1] to-100% bg-fixed">
+        <div class="container mx-auto xl:px-32">
+          <div class="grid lg:grid-cols-2 gap-12 flex items-center">
+            <div class="mt-12 lg:mt-0">
+              <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">Problems with the budget? <br /><span class="text-gray-900">Fix it now!</span></h1>
+              <a class="inline-block px-7 py-3 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="light" href="#!" role="button">Sign up</a>
+              <a class="inline-block px-7 py-3 bg-transparent text-blue-600 font-medium text-sm leading-snug uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="light" href="#mihau" role="button">Try Milica</a>
+            </div>
+            <div class="mb-0">
+              <img
+                src={logo}
+                class="w-full rounded-[20px] shadow-lg"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <div className='relative'>
-        <input type="text" placeholder='How can I help?'/>
+      <div>
+        <Milica />
       </div>
     </div>
   )
