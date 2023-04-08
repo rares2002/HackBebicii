@@ -30,9 +30,9 @@ export class AuthService {
   }
 
   async register(registerUserDto: RegisterUserDto) {
-    delete registerUserDto.password_confirmation; // already confirmed by Dto
+    // delete registerUserDto.password_confirmation; // already confirmed by Dto
     registerUserDto.password = await bcrypt.hash(registerUserDto.password, 10);
-
+    console.log(registerUserDto)
     try {
       const user = await this.prisma.user.create({
         data: { ...registerUserDto },

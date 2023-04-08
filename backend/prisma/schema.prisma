@@ -11,3 +11,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ROLE {
+  USER
+  ADMIN
+  HR
+}
+
+model User {
+  id            Int                  @id @default(autoincrement())
+  name          String
+  password      String
+  email         String               @unique
+  telephone     String               @unique
+  amount        Int                  @default(0)
+  subscriptions SubscriptionOnPost[]
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+}
+
+model Subscription {
+  id        Int                  @id @default(autoincrement())
+  price     Int
+  User      SubscriptionOnPost[]
+  user_id   Int
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+}
+
+model SubscriptionOnPost {
+  id              Int          @id @default(autoincrement())
+  User            User         @relation(fields: [user_id], references: [id])
+  user_id         Int
+  Subscription    Subscription @relation(fields: [subscriptionId], references: [id])
+  subscriptionId Int
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}

@@ -17,7 +17,7 @@ export class ChatgptService {
                 model: 'gpt-3.5-turbo',
                 messages: [{
                     role: 'system',
-                    content: "!"You are a finance trainer for students who are in need of advice for how to handle their finances and budgets better. Provide useful information fot the following questions
+                    content: "You are a finance trainer for students who are in need of advice for how to handle their finances and budgets better. Provide useful information fot the following questions"
                 },
                 {
                     role: 'user',
