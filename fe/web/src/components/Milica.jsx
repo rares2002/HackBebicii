@@ -5,8 +5,8 @@ import MessageBoxRight from "./MessageBoxRight"
 
 function Milica() {
     const questionsRef = useRef();
-    const [response, setResponse] = useState([""]);
-    const [question, setQuestion] = useState([""]);
+    const [response, setResponse] = useState([]);
+    const [question, setQuestion] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [asking, setAsking] = useState(false);
 

@@ -22,7 +22,7 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path='/' exact element={<Home />}/>
+          <Route path='/expenses' exact element={<Home />}/>
           {!token && <Route path='/login' element={<Login />}/>}
           {!token && <Route path='/register' element={<Register />} />}
           {token && <Route path='/logout' element={<Logout />} />}
