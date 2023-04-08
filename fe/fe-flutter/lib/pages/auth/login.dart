@@ -7,6 +7,7 @@ import 'package:banking_app/widgets/boxes.dart';
 import 'dart:async';
 import 'package:banking_app/models/user.dart';
 import 'package:banking_app/utilities/server.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   String password = "";
   bool loading = false;
   bool success = false;
+  
   void _processServerResponse(Map<String, dynamic> response) async {
     if (response["succes"]) {
       User.createUser(response["data"]["user"], response["data"]["token"]);
@@ -44,14 +46,19 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void login() {
+  Future<void>  login() async {
     // TODO validation !!!
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    
+    String? FireBaseToken = await messaging.getToken(
+      vapidKey: "BGXj_7PqQSaD4_IRZjNKWqOSJbMCRhVbwZO59A9iB74wg6uoYNFYtGsxZN7Kse7V8_Fl21omTMaeXDDIzvNH4PU",
+    );
     setState(() {
       loading = true;
     });
 
     Future<Map<String, dynamic>> response = Server.apiCall('/auth/login',
-        RequestType.POST, {"email": email, "password": password}, null);
+        RequestType.POST, {"email": email, "password": password, "FireBaseToken": FireBaseToken}, null);
 
     response.then((value) => _processServerResponse(value));
   }

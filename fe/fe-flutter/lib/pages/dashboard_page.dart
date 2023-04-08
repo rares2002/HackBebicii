@@ -1,9 +1,9 @@
 import 'package:banking_app/data_json/balance_json.dart';
+import 'package:banking_app/pages/add_page.dart';
 import 'package:banking_app/pages/card_page.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -13,6 +13,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashbaordPageState extends State<DashboardPage> {
   int pageIndex = 0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,15 +32,15 @@ class _DashbaordPageState extends State<DashboardPage> {
       backgroundColor: primary,
       leading: IconButton(
           onPressed: () {},
-          icon: CircleAvatar(
+          icon: const CircleAvatar(
             backgroundImage: NetworkImage(
                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
           )),
       actions: [IconButton(onPressed: () {}, icon: Icon(AntDesign.search1))],
     );
   }
+
   Widget getBody() {
-   
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -120,20 +121,34 @@ class _DashbaordPageState extends State<DashboardPage> {
                       SizedBox(
                         width: 15,
                       ),
-                      Flexible(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: secondary.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                            child: Text(
-                              "Add card",
-                              style: TextStyle(
-                                  color: white, fontWeight: FontWeight.w500),
+                      TextButton(
+                        style:  TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          fixedSize: Size(200, 200)
+                          
+                        ),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  AddCardPage())),
+                                
+                        child: 
+                        // Flexible(
+                          // child: 
+                          Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: secondary.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Center(
+                              child: Text(
+                                "Add card",
+                                style: TextStyle(
+                                    color: white, fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
-                        ),
+                        // ),
                       ),
                       SizedBox(
                         width: 15,
@@ -153,7 +168,7 @@ class _DashbaordPageState extends State<DashboardPage> {
                           ),
                         ),
                       ),
-                      const SizedBox( 
+                      const SizedBox(
                         width: 15,
                       ),
                     ],
@@ -226,7 +241,7 @@ class _DashbaordPageState extends State<DashboardPage> {
                               child: Icon(
                                 AntDesign.wallet,
                                 color: primary,
-                                 size: 20,
+                                size: 20,
                               ),
                             ),
                           ),
@@ -365,8 +380,8 @@ class _DashbaordPageState extends State<DashboardPage> {
             height: 15,
           ),
           GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => CardPage()));
+            onTap: () {
+             Navigator.push(context, MaterialPageRoute(builder: (_) => CardPage()));
             },
             child: Container(
               width: double.infinity,
@@ -389,40 +404,38 @@ class _DashbaordPageState extends State<DashboardPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Row(
-                      children: [
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              color: secondary.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                            child: Icon(
-                              AntDesign.creditcard,
-                              color: primary,
-                              size: 20,
+                        Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: secondary.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Center(
+                                child: Icon(
+                                  AntDesign.creditcard,
+                                  color: primary,
+                                  size: 20,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "EUR *2330",
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            )
+                          ],
                         ),
                         Text(
-                          "EUR *2330",
-                          style: TextStyle(
-                              fontSize: 15, ),
-                        )
-                      ],
-                    ),
-                    Text(
                           "8 199.24 EUR",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         )
-                      
-                    
-                    
                       ],
                     )
                   ],

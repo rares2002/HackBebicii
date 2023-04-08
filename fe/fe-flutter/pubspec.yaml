@@ -27,16 +27,19 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cupertino_icons: ^1.0.2
+  flip_card: ^0.6.0
+  patterns_canvas: ^0.4.0
   flutter:
     sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
   animated_bottom_navigation_bar: 
   flutter_icons: 
   http: ^0.13.5
+  firebase_messaging: ^14.4.0
 
 dev_dependencies:
   flutter_test:
@@ -65,8 +68,11 @@ flutter_icons:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+firebase_core :
 flutter:
 
+
+  
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -76,7 +82,10 @@ flutter:
     - assets/images/Logo.png
     - assets/images/login-background.png
     - assets/images/Logo-transparent.png
-
+    - assets/icons/checked.png
+    - assets/icons/chip.png
+    - assets/icons/contact_less.png
+    - assets/icons/mastercard.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "221934147274",
+    "project_id": "hack-bebuicii",
+    "storage_bucket": "hack-bebuicii.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221934147274:android:c97d97162ef468691c4633",
+        "android_client_info": {
+          "package_name": "com.example.banking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221934147274-kgnhg81c6e6aiiqlskq4tb5rapqujrda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfEcMgCqTs3ll4bjtYHK-id_hSIZhtL2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "221934147274-kgnhg81c6e6aiiqlskq4tb5rapqujrda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

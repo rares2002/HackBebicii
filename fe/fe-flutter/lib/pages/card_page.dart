@@ -96,8 +96,9 @@ class _CardPageState extends State<CardPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(
-                        child: Container(
+                      // Flexible(
+                        // child:
+                         Container(
                           width: size.width / 2,
                           height: 55,
                           decoration: BoxDecoration(
@@ -114,9 +115,10 @@ class _CardPageState extends State<CardPage> {
                             ),
                           ),
                         ),
-                      ),
-                      Flexible(
-                        child: Container(
+                      // ),
+                      // Flexible(
+                        // child:
+                         Container(
                           width: size.width / 2,
                           height: 55,
                           decoration: BoxDecoration(
@@ -134,7 +136,7 @@ class _CardPageState extends State<CardPage> {
                             ),
                           ),
                         ),
-                      ),
+                      // ),
                     ],
                   ),
                 ),

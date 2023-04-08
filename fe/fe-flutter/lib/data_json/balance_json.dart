@@ -1,6 +1,5 @@
 const List balanceLists = [
-  
-  
+
   {
     "amount": "18 199.24",
     "currency" : "RON",
