@@ -41,7 +41,6 @@ model Subscription {
   price       Int
   description String
   user        SubscriptionOnUser[]
-  user_id     Int?
   createdAt   DateTime             @default(now())
   updatedAt   DateTime             @updatedAt
 }
@@ -72,6 +71,8 @@ model SubscriptionOnUser {
   subscriptionId Int
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+
+  @@unique([user_id, subscriptionId])
 }
 
 enum Role {
