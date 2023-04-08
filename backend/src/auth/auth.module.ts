@@ -7,7 +7,7 @@ import { AuthController } from './auth.controller';
 import { JwtAuthGuard } from './guards/jwt.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthService } from './auth.service';
-// import { RolesGuard } from './guards/roles.guard';
+import { RolesGuard } from './guards/roles.guard';
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ dotenv.config();
     }),
   ],
   controllers: [AuthController],
-  providers: [JwtAuthGuard, JwtStrategy, AuthService ],
-  exports: [JwtAuthGuard, JwtStrategy, AuthService],
+  providers: [JwtAuthGuard, JwtStrategy, AuthService, RolesGuard ],
+  exports: [JwtAuthGuard, JwtStrategy, AuthService, RolesGuard],
 })
 export class AuthModule {}

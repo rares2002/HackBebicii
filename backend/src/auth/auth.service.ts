@@ -14,19 +14,30 @@ dotenv.config();
 export class AuthService {
   private uid: ShortUniqueId;
 
-  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
+  constructor(private prisma: PrismaService, private jwtService: JwtService) { }
 
   async login({ email, password }: LoginUserDto) {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user || !bcrypt.compareSync(password, user.password))
-      throw new HttpException(
-        'Wrong email or password',
+      throw new HttpException({
+        data: {
+          error: 'Invalid credentials'
+        },
+        success: false,
+      },
         HttpStatus.BAD_REQUEST,
       );
 
     delete user.password;
-    return { token: this.jwtService.sign({ data: user }) };
+    return {
+      error: undefined,
+      succes: true,
+      data: {
+        token: this.jwtService.sign({ data: user }),
+        user: user
+      }
+    };
   }
 
   async register(registerUserDto: RegisterUserDto) {
@@ -38,14 +49,24 @@ export class AuthService {
         data: { ...registerUserDto },
       });
       delete user.password;
-      return { token: this.jwtService.sign({ data: user }) };
-    } catch (e) {
+      return { success: true, data: undefined }
+    }
+    catch (e) {
       if (e.code === DB_CONFLICT) {
-        throw new HttpException('Email is already used.', HttpStatus.CONFLICT);
+        throw new HttpException({
+          success: false,
+          data: {
+            error: 'User already exists'
+          }
+        }, HttpStatus.CONFLICT);
       } else {
         console.error(e);
-        throw new HttpException(
-          'Internal server error',
+        throw new HttpException({
+          success: false,
+          data: {
+            error: 'Internal server error'
+          }
+        },
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
