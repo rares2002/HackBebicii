@@ -38,7 +38,7 @@ class _RootAppState extends State<RootApp> {
     return IndexedStack(
       index: pageIndex,
       children: [
-        DashbaordPage(),
+        DashboardPage(),
         Center(
           child: Text("Chat Page",style: TextStyle(
             fontSize: 20,

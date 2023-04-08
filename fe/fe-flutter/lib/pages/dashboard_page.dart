@@ -4,14 +4,14 @@ import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class DashbaordPage extends StatefulWidget {
-  const DashbaordPage({Key? key}) : super(key: key);
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<DashbaordPage> createState() => _DashbaordPageState();
+  State<DashboardPage> createState() => _DashbaordPageState();
 }
 
-class _DashbaordPageState extends State<DashbaordPage> {
+class _DashbaordPageState extends State<DashboardPage> {
   int pageIndex = 0;
   @override
   Widget build(BuildContext context) {

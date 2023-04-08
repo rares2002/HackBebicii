@@ -4,11 +4,12 @@ import 'package:banking_app/widgets/images.dart';
 import 'package:banking_app/widgets/buttons.dart';
 import 'package:banking_app/widgets/input_form.dart';
 import 'package:banking_app/widgets/boxes.dart';
+import 'dart:async';
+import 'package:banking_app/models/user.dart';
+import 'package:banking_app/utilities/server.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
-
-  
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -16,6 +17,45 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String email = "";
   String password = "";
+  bool loading = false;
+  bool success = false;
+  void _processServerResponse(Map<String, dynamic> response) async {
+    if (response["succes"]) {
+      User.createUser(response["data"]["user"], response["data"]["token"]);
+      setState(() {
+        success = true;
+      });
+
+      Future.delayed(const Duration(seconds: 2), () {
+        response["succes"]
+            ? Navigator.popAndPushNamed(context, '/dashboard')
+            : Navigator.popAndPushNamed(context, '/login');
+        //response["data"]["user"]["role"] == "VOLUNTEER" ?
+        //   Navigator.popAndPushNamed(context, '/volunteer') :
+        //   Navigator.popAndPushNamed(context, '/home');
+      });
+    } else {
+      setState(() {
+        success = false;
+      });
+    }
+    setState(() {
+      loading = false;
+    });
+  }
+
+  void login() {
+    // TODO validation !!!
+    setState(() {
+      loading = true;
+    });
+
+    Future<Map<String, dynamic>> response = Server.apiCall('/auth/login',
+        RequestType.POST, {"email": email, "password": password}, null);
+
+    response.then((value) => _processServerResponse(value));
+  }
+
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -60,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
         context,
         'assets/google.png',
         'Login',
-        () => {},
+        login,
         true,
       ),
       const SizedBox(

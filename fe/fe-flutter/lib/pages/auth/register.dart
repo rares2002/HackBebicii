@@ -1,6 +1,6 @@
-
 import 'package:banking_app/utilities/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:banking_app/utilities/server.dart';
 import 'package:banking_app/widgets/images.dart';
 import 'package:banking_app/widgets/buttons.dart';
 import 'package:banking_app/widgets/input_form.dart';
@@ -19,23 +19,59 @@ class RegisterPageState extends State<RegisterPage> {
   String name = "";
   String phone = "";
   String confirmPassword = "";
+  bool loading = false;
+  bool success = false;
+
+  void register() {
+    setState(() {
+      loading = true;
+    });
+    void _processServerResponse(Map<String, dynamic> response) {
+      setState(() {
+        loading = false;
+      });
+      if (response["success"]) {
+        setState(() {
+          success = true;
+        });
+
+        Future.delayed(const Duration(seconds: 2), () {
+          Navigator.popAndPushNamed(context, '/login');
+        });
+      } else {
+        setState(() {
+          success = false;
+        });
+      }
+    }
+
+    Future<Map<String, dynamic>> response = Server.apiCall(
+        '/auth/register',
+        RequestType.POST,
+        {
+          "name": name,
+          "telephone": phone,
+          "email": email,
+          "password": password,
+          "confPassword": confirmPassword,
+        },
+        null);
+    response.then((value) => _processServerResponse(value));
+  }
+
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
     return getScrollColumn([
       // idea: these might actually ecapsulate the underlying widget and be set
       // as percentages of screen height
-      const SizedBox(
-        height: 20,
-      ),
+
       getLogo(context),
-      const SizedBox(
-        height: 20,
-      ),
+
       Text('Create Account',
           style: getTheme().getTextStyle(40, 900, false, Colors.white)),
       const SizedBox(
-        height: 50,
+        height: 20,
       ),
       createInputForm(
         node,
@@ -44,9 +80,6 @@ class RegisterPageState extends State<RegisterPage> {
         'Enter your full name',
         Icons.person,
         (value) => {name = value},
-      ),
-      const SizedBox(
-        height: 20,
       ),
 
       createInputForm(
@@ -57,9 +90,7 @@ class RegisterPageState extends State<RegisterPage> {
         Icons.email,
         (value) => {email = value},
       ),
-      const SizedBox(
-        height: 20,
-      ),
+
       createInputForm(
         node,
         false,
@@ -68,9 +99,7 @@ class RegisterPageState extends State<RegisterPage> {
         Icons.phone,
         (value) => {phone = value},
       ),
-      const SizedBox(
-        height: 20,
-      ),
+
       createInputForm(
         node,
         true,
@@ -79,9 +108,7 @@ class RegisterPageState extends State<RegisterPage> {
         Icons.lock,
         (value) => {password = value},
       ),
-      const SizedBox(
-        height: 50,
-      ),
+
       createInputForm(
         node,
         true,
@@ -91,20 +118,16 @@ class RegisterPageState extends State<RegisterPage> {
         (value) => {confirmPassword = value},
       ),
       const SizedBox(
-        height: 50,
+        height: 20,
       ),
+
       createAuthButton(
         context,
         'assets/google.png',
-        'Login',
-        () => {},
+        'Register',
+        register,
         true,
       ),
-      const SizedBox(
-        height: 50,
-      ),
-      createLinkBlockButton(
-          context, '', "Dont't have an account yet? Register here"),
     ], context);
   }
 }
