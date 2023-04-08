@@ -4,6 +4,10 @@ import helmet from 'helmet';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
+import * as admin from 'firebase-admin';
+import fcm from 'fcm-notification';
+import { firebaseConfig } from './firebase.config';
+import * as serviceAccountCredentials from '../fix-your-budget-firebase-adminsdk-s8wr3-fc2502a1d3.json';
 
 dotenv.config();
 
@@ -35,6 +39,31 @@ async function bootstrap() {
     }),
   );
 
+  const serviceAccount = serviceAccountCredentials as admin.ServiceAccount;
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+    })
+  
+  const FCM = new fcm(serviceAccount);
+  let message = {
+    android: {
+        notification: {
+            title: "Ana",
+            body: "test",
+        },
+    },
+    token: "anaaaa"
+  };
+  try {
+    FCM.send(message, (err, resp) => {
+      if (err) throw err;
+      console.log("Successfully sent");
+    })
+  } catch(err) {
+    console.log(err);
+  }
   await app.listen(process.env.PORT);
+  
+ 
 }
 bootstrap();
