@@ -81,7 +81,7 @@ const Comment = (props) => {
         {props.profile ? (
           <Box>
             <Typography variant="h6">
-              <Link underline="hover" to={"/posts/" + comment.post._id}>
+              <Link underline="hover" to={"posts/" + comment.post._id}>
                 {comment.post.title}
               </Link>
             </Typography>

@@ -8,21 +8,11 @@ const { authSocket, socketServer } = require("./socketServer");
 const posts = require("./routes/posts");
 const users = require("./routes/users");
 const comments = require("./routes/comments");
-const messages = require("./routes/messages");
-const PostLike = require("./models/PostLike");
-const Post = require("./models/Post");
+
 
 dotenv.config();
 
 const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer, {
-  cors: {
-    origin: ["http://localhost:3000", "https://post-it-heroku.herokuapp.com"],
-  },
-});
-
-io.use(authSocket);
-io.on("connection", (socket) => socketServer(socket));
 
 mongoose.connect(
   process.env.MONGO_URI,
@@ -32,7 +22,7 @@ mongoose.connect(
   }
 );
 
-httpServer.listen(process.env.PORT || 4000, () => {
+httpServer.listen(4000, () => {
   console.log("Listening");
 });
 

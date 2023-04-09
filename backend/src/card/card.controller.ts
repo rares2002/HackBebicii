@@ -23,6 +23,8 @@ export class CardController {
     @UserGuard() user: any
   )
   {
+    console.log(user)
+    
     return this.cardService.getMyCards(user);
   }
 
