@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import Navbar from '../../components/Navbar';
+import Achievement from '../../components/Achievement';
 
 function Profile() {
     const [user, setUser] = useState({});
@@ -13,8 +14,6 @@ function Profile() {
             }
         });
         let data = await res.data;
-
-        console.log(data);
         setUser(data);
     }
 
@@ -23,35 +22,41 @@ function Profile() {
     }, [])
 
     return (
-        <div class="h-screen flex items-center justify-center">
+        <div class="h-screen w-screen flex items-center justify-center bg-gradient-to-l from-[#06ef68] from-40% to-[#3758d1] to-100%">
             <Navbar />
-            <div class="border-b-2 block md:flex">
-
-                <div class="w-full p-8 bg-white lg:ml-4 shadow-md">
-                    <div class="rounded shadow p-6">
+            <div class="w-screen flex flex-row justify-between items-start ">
+                {/* PROFILE COMPONENT */}
+                <div class="w-1/3 p-8 rounded-[20px] text-white lg:ml-4">
+                    <div class="rounded shadow  p-6">
                         <div class="pb-6">
-                        <label for="name" class="font-semibold text-gray-700 block pb-2">Name</label>
-                        <div class="flex">
-                            <p class="border-1 rounded-r px-4 py-2 w-full">{user.name}</p>
-                        </div>
+                            <label for="name" class="font-semibold block pb-2">Name</label>
+                            <div class="flex">
+                                <p class="border-1 rounded-r px-4 py-2 w-full">{user.name}</p>
+                            </div>
                         </div>
                         <div class="pb-5">
-                            <label for="about" class="font-semibold text-gray-700 block pb-2">Email</label>
+                            <label for="about" class="font-semibold block pb-2">Email</label>
                             <div class="flex">
-                                <p class="border-1 rounded-r px-4 py-2 w-full">{user.email}</p>
+                                <p class="rounded-r px-4 py-2 w-full">{user.email}</p>
                             </div>
-                            <label for="about" class="font-semibold text-gray-700 block pb-2">Phone</label>
+                            <label for="about" class="font-semibold block pb-2">Phone</label>
                             <div class="flex">
                                 <p class="border-1 rounded-r px-4 py-2 w-full">{user.telephone}</p>
                             </div>
-                            <label for="about" class="font-semibold text-xl text-gray-700 block pb-4 pt-4">Amount</label>
+                            <label for="about" class="font-semibold text-xl block pb-4 pt-4">Amount</label>
 
                             <div class="flex">
-                                <p class="border-1 rounded-r text-lg px-4 py-2 w-full">{user.amount}</p>
+                                <p class="rounded-r text-lg px-4 py-2 w-full">{user.amount}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                {/* ACHIEVEMENTS LIST */}
+                <div className='relative w-2/3'>
+                    <h1 className='relative font-bold text-[2vw] border-b-1 rounded-r text-white'>Achievements: </h1>
+                    <Achievement />
+                </div>
+                
             </div>    
         </div>
     )
