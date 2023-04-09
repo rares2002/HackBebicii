@@ -47,7 +47,7 @@ function Profile() {
                             <label for="about" class="font-semibold text-xl block pb-4 pt-4">Amount</label>
 
                             <div class="flex">
-                                <p class="rounded-r text-lg px-4 py-2 w-full">{user.amount}</p>
+                                <p class="rounded-r text-lg px-4 py-2 w-full">{user.amount} Ron</p>
                             </div>
                         </div>
                     </div>
