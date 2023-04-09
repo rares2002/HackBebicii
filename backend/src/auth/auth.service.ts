@@ -28,7 +28,7 @@ export class AuthService {
       },
         HttpStatus.BAD_REQUEST,
       );
-
+    
     delete user.password;
     return {
       error: undefined,

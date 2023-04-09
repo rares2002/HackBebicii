@@ -9,6 +9,6 @@ router.post("/login", userControllers.login);
 router.get("/random", userControllers.getRandomUsers);
 
 router.get("/:username", userControllers.getUser);
-router.patch("/:id", verifyToken, userControllers.updateUser);
+// router.patch("/:id", verifyToken, userControllers.updateUser);
 
 module.exports = router;

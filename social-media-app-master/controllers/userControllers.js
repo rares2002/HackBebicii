@@ -3,7 +3,6 @@ const Post = require("../models/Post");
 const PostLike = require("../models/PostLike");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Follow = require("../models/Follow");
 const { default: mongoose } = require("mongoose");
 
 const getUserDict = (token, user) => {
@@ -25,34 +24,20 @@ const buildToken = (user) => {
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
-    if (!(username && email && password)) {
-      throw new Error("All input required");
-    }
-
-    const normalizedEmail = email.toLowerCase();
-
+    // const normalizedEmail = email.toLowerCase();
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const existingUser = await User.findOne({
-      $or: [{ email: normalizedEmail }, { username }],
-    });
-
-    if (existingUser) {
-      throw new Error("Email and username must be unique");
-    }
-
     const user = await User.create({
       username,
-      email: normalizedEmail,
+      email: email,
       password: hashedPassword,
     });
-
+    console.log(user)
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);
 
     return res.json(getUserDict(token, user));
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    
+    return res.status(500).json({ error: err.message });
   }
 };
 
@@ -162,11 +147,7 @@ const getRandomIndices = (size, sourceSize) => {
 module.exports = {
   register,
   login,
-  follow,
-  unfollow,
-  getFollowers,
-  getFollowing,
   getUser,
   getRandomUsers,
-  updateUser,
+  
 };

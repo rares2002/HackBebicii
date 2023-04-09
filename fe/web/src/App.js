@@ -14,6 +14,8 @@ import ExploreView from "./pages/forum/src/components/views/ExploreView";
 import PrivateRoute from "./pages/forum/src/components/PrivateRoute";
 import SearchView from "./pages/forum/src/components/views/SearchView";
 import theme from "./pages/forum/src/theme";
+import './App.css';
+
 
 function App() {
   const [token, setToken] = useState("");
