@@ -1,7 +1,61 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from "axios"
 
 function Cards() {
     const [showModal, setShowModal] = useState(false);
+    const [number, setNumber] = useState("");
+    const [expDate, setExpDate] = useState("");
+    const [cvc, setCvc] = useState("");
+    const [cards, setCards] = useState([]);
+
+    const handleNumber = (e) => {
+        e.preventDefault();
+        setNumber(e.target.value);
+    }
+
+    const handleExpDate = (e) => {
+        e.preventDefault();
+        setExpDate(e.target.value);
+    }
+
+    const handleCvc = (e) => {
+        e.preventDefault();
+        setCvc(e.target.value);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let exp_month = expDate.split('/')[0];
+        let exp_year = "20" + expDate.split('/')[1];
+
+        console.log(exp_month + "/" + exp_year);
+
+        let res = await axios.post("http://127.0.0.1:3001/card/create", {
+            number: number,
+            exp_month: parseInt(exp_month),
+            exp_year: parseInt(exp_year),
+            cvc: parseInt(cvc)
+        })
+
+        let data = await res.data;
+        console.log(data);
+    }
+
+    const getCards = async () => {
+        let res = await axios.get("http://127.0.0.1:3001/card/get-my-cards", {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+
+        let data = await res.data;
+        console.log(data);
+        setCards(data);
+    }
+
+    useEffect(() => {
+        getCards();
+    }, [])
 
     return (
         <div className='h-full w-full flex flex-col'>
@@ -40,13 +94,13 @@ function Cards() {
                         {/* <p className="my-4 text-slate-500 text-lg leading-relaxed">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, fugiat.
                         </p> */}
-                        <form class="w-full max-w-lg">
+                        <form class="w-full max-w-lg" onSubmit={handleSubmit}>
                             <div class="flex flex-wrap -mx-3 mb-6">
                                 <div class="w-full px-3">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                                     Card number:
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="4213 **** **** ****" />
+                                <input onChange={handleNumber} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="4213 **** **** ****" />
                                 </div>
                             </div>
                             <div class="flex flex-wrap -mx-3 mb-6">
@@ -54,35 +108,32 @@ function Cards() {
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                                     Valid Thru
                                 </label>
-                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="MM/YY" />
+                                    <input onChange={handleExpDate} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="MM/YY" />
                                 </div>
                                 <div class="w-full md:w-1/2 px-3">
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                                         CSV 
                                     </label>
-                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="***" />
+                                    <input onChange={handleCvc} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="***" />
                                 </div>
                             </div>
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                                <div class="w-full px-3">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                                    Name: 
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="John Doe" />
-                                </div>
+                            <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                <button
+                                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="submit"
+                                    onClick={() => {
+                                        setTimeout(() => {
+                                            setShowModal(false);
+                                        }, 1000)
+                                    }}  
+                                >
+                                    Add Card
+                                </button>
                             </div>
                             </form>
+                            
                         </div>
-                        {/*footer*/}
-                        <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                        <button
-                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button"
-                            onClick={() => setShowModal(false)}
-                        >
-                            Add Card
-                        </button>
-                        </div>
+                        
                     </div>
                     </div>
                 </div>
@@ -91,49 +142,26 @@ function Cards() {
             ) : null}
             </>
             <div class="h-full w-full flex flex-row">
+                {cards.map((card) => {
+                    
+                    return (
+                        <div class="container p-3 flex justify-center items-center">
+                            <div class="w-[20vw] p-3 bg-gradient-to-r from-gray-600 to-black rounded-lg">
+                                <h1 class="text-3xl font-semibold text-gray-100 pb-4">{card.card.brand}</h1>
+                                {/* <span class="text-xs  text-gray-200 shadow-2xl"></span> */}
+                                <div class="flex justify-between items-center pt-4">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-gray-300 font-bold">**** **** **** {card.card.last4}</span>
+                                        <span class="text-xs text-gray-300 font-bold">{"0" + card.card.exp_month.toString() + "/" + (card.card.exp_year - 2000).toString()}</span>
+                                    </div>
+                                    <img src="https://img.icons8.com/offices/80/000000/sim-card-chip.png" width="48" />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
                 
-                <div class="container p-3 flex justify-center items-center">
-                    <div class="w-[20vw] p-3 bg-gradient-to-r from-gray-600 to-black rounded-lg">
-                        <h1 class="text-3xl font-semibold text-gray-100 pb-4">Herno</h1>
-                        <span class="text-xs  text-gray-200 shadow-2xl">John Snow</span>
-                        <div class="flex justify-between items-center pt-4">
-                            <div class="flex flex-col">
-                                <span class="text-xs text-gray-300 font-bold">1234 4567 8901 2345</span>
-                                <span class="text-xs text-gray-300 font-bold">09/10</span>
-                            </div>
-                            <img src="https://img.icons8.com/offices/80/000000/sim-card-chip.png" width="48" />
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="container p-3 flex justify-center items-center">
-                    <div class="w-[20vw] p-3 bg-gradient-to-r from-gray-600 to-black rounded-lg">
-                        <h1 class="text-3xl font-semibold text-gray-100 pb-4">Herno</h1>
-                        <span class="text-xs  text-gray-200 shadow-2xl">John Snow</span>
-                        <div class="flex justify-between items-center pt-4">
-                            <div class="flex flex-col">
-                                <span class="text-xs text-gray-300 font-bold">1234 4567 8901 2345</span>
-                                <span class="text-xs text-gray-300 font-bold">09/10</span>
-                            </div>
-                            <img src="https://img.icons8.com/offices/80/000000/sim-card-chip.png" width="48" />
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="container p-3 flex justify-center items-center">
-                    <div class="w-[20vw] p-3 bg-gradient-to-r from-gray-600 to-black rounded-lg">
-                        <h1 class="text-3xl font-semibold text-gray-100 pb-4">Herno</h1>
-                        <span class="text-xs  text-gray-200 shadow-2xl">John Snow</span>
-                        <div class="flex justify-between items-center pt-4">
-                            <div class="flex flex-col">
-                                <span class="text-xs text-gray-300 font-bold">1234 4567 8901 2345</span>
-                                <span class="text-xs text-gray-300 font-bold">09/10</span>
-                            </div>
-                            <img src="https://img.icons8.com/offices/80/000000/sim-card-chip.png" width="48" />
-                        </div>
-                    </div>
-                    
-                </div>
+                
             </div>
         </div>
     )
