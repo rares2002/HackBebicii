@@ -13,9 +13,9 @@ import ProfileView from "./pages/forum/src/components/views/ProfileView";
 import ExploreView from "./pages/forum/src/components/views/ExploreView";
 import PrivateRoute from "./pages/forum/src/components/PrivateRoute";
 import SearchView from "./pages/forum/src/components/views/SearchView";
-import MessengerView from "./pages/forum/src/components/views/MessengerView";
 import theme from "./pages/forum/src/theme";
-import './App.css'; import Contact from "./pages/contact/Contact";
+import './App.css'; 
+
 
 function App() {
   const [token, setToken] = useState("");
@@ -29,7 +29,6 @@ function App() {
   }, [])
 
   return (
-
     <ThemeProvider theme={theme}>
       <ChakraProvider>
         <BrowserRouter>
@@ -59,7 +58,6 @@ function App() {
         </BrowserRouter>
       </ChakraProvider>
     </ThemeProvider>
-
   );
 }
 

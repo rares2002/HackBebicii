@@ -1,43 +1,38 @@
+import React, {useState, useEffect} from 'react'
 import Modal from './Modal'
-import React, { useEffect, useState } from 'react'
-import { SimpleGrid, Card, CardHeader, CardBody, Heading, CardFooter } from '@chakra-ui/react'
-import { Button, Text } from '@chakra-ui/react'
 import axios from 'axios'
 
-function Achievement() {
-    const [achievements, setAchievements] = useState([])
-    const [show, setShow] = useState(false)
-    const fetchach = async () => {
-        console.log(localStorage.getItem('token'));
-        const response = await axios.get('http://localhost:3001/achievements/my-achievements', {
+function Achievement(props) {
+    const [achievements, setAchievements] = useState([]);
+    
+    const getAchievements = async () => {
+        let res = await axios.get("http://127.0.0.1:3001/achievements/my-achievements", {
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
-        })
-        console.log(response)
-        setAchievements(response.data)
+        });
+        let data = await res.data;
+        console.log(data)
+        setAchievements(data);
     }
 
     useEffect(() => {
-        fetchach();
+        getAchievements();
     }, [])
+
     return (
-        <>
-            {achievements.map((achievement) => (
-                <SimpleGrid columns={3} spacing={10}>
-                    <Card>
-                        <CardHeader>
-                            <Heading size='md'>{achievement.achievement.name}</Heading>
-                        </CardHeader>
-                        <CardFooter>
-                            <Modal show={show} setShowModal={setShow} title={achievement.achievement.name} description={achievement.achievement.reward}></Modal>
-                            <Button onClick={() => setShow(true)}>View here</Button>
-                        </CardFooter>
-                    </Card>
-                </SimpleGrid>
-            ))
-            }
-        </>
+        <ul class="w-full">
+            {achievements.map((elem) => {
+                return (
+                    <li
+                        class="w-full flex flex-row justify-between mb-[2vh] pl-[5vw] pr-[5vw] text-[#6ec995] font-bold text-[1.25rem] bg-[#222c57] rounded-xl items-center border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
+                        <p>{elem.achievement.name}</p>
+                        <Modal title={elem.achievement.name} description={elem.achievement.reward} />
+                    </li>
+                )
+            })}
+            
+        </ul>
     )
 }
 

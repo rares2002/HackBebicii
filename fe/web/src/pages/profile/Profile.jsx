@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import Navbar from '../../components/Navbar';
 import Achievement from '../../components/Achievement';
+import Cards from '../../components/Cards';
 
 function Profile() {
     const [user, setUser] = useState({});
@@ -22,12 +23,12 @@ function Profile() {
     }, [])
 
     return (
-        <div class="h-screen w-screen pt-20 flex items-center justify-center bg-gradient-to-l from-[#06ef68] from-40% to-[#3758d1] to-100%">
+        <div class="h-screen bg-fixed w-full flex items-center justify-center bg-gradient-to-l from-[#06ef68] from-0% to-[#3758d1] to-100%">
             <Navbar />
-            <div class="w-screen flex flex-row justify-between items-start ">
+            <div class="w-[95vw] flex flex-row justify-between items-start ">
                 {/* PROFILE COMPONENT */}
-                <div class="w-1/3 p-8 rounded-[20px] text-white lg:ml-4">
-                    <div class="rounded shadow  p-6">
+                <div class="w-auto p-8 rounded-[20px] bg-[#222c57] text-[#6ec995] lg:ml-4">
+                    <div class="rounded p-6">
                         <div class="pb-6">
                             <label for="name" class="font-semibold block pb-2">Name</label>
                             <div class="flex">
@@ -53,8 +54,11 @@ function Profile() {
                 </div>
                 {/* ACHIEVEMENTS LIST */}
                 <div className='relative w-2/3'>
-                    <h1 className='relative font-bold text-[2vw] border-b-1 rounded-r text-white'>Achievements: </h1>
-                    <Achievement />
+                    <h1 className='relative font-bold text-[2vw] border-b-1 rounded-r text-white mb-[3vh]'>Cards: </h1>
+                    <Cards />
+                    
+                    <h1 className='relative font-bold text-[2vw] border-b-1 rounded-r text-white mb-[3vh]'>Achievements: </h1>
+                    <Achievement />                    
                 </div>
                 
             </div>    
