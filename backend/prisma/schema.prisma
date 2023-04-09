@@ -51,14 +51,13 @@ model AchievementOnUser {
   user           User        @relation(fields: [user_id], references: [id])
   achievement_id Int
   achievement    Achievement @relation(fields: [achievement_id], references: [id])
-
-  
 }
 
 model SubscriptionOnUser {
   id             Int          @id @default(autoincrement())
   User           User         @relation(fields: [user_id], references: [id])
   user_id        Int
+  card           String?
   Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
   subscriptionId Int
   createdAt      DateTime     @default(now())

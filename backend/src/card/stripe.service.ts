@@ -47,9 +47,10 @@ export class StripeService {
         const ids = JSON.parse(foundUser.cards);
         console.log(ids);
 
-        const idsDetails = await Promise.all(ids.map( async (value) => {
-            return await this.stripeApi.paymentMethods.retrieve(value)
-        }))
-        console.log(idsDetails)
+        const detailedIds = await Promise.all(ids.map(async (value) => 
+            this.stripeApi.paymentMethods.retrieve(value)
+        ))
+        return detailedIds;
+        
     }
 }

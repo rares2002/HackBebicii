@@ -13,9 +13,7 @@ import ProfileView from "./pages/forum/src/components/views/ProfileView";
 import ExploreView from "./pages/forum/src/components/views/ExploreView";
 import PrivateRoute from "./pages/forum/src/components/PrivateRoute";
 import SearchView from "./pages/forum/src/components/views/SearchView";
-import MessengerView from "./pages/forum/src/components/views/MessengerView";
 import theme from "./pages/forum/src/theme";
-import './App.css'; import Contact from "./pages/contact/Contact";
 
 function App() {
   const [token, setToken] = useState("");

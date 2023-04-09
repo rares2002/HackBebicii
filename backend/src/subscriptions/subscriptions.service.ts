@@ -14,11 +14,13 @@ export class SubscriptionsService {
         })
     }
 
-    subscribe(id: number, user: UserJwtPayload) {
+    subscribe(id: number, user: UserJwtPayload, card: string) {
+        console.log(card)
         return this.prisma.subscriptionOnUser.create({
             data: {
                 subscriptionId: id,
                 user_id: user.id,
+                card: card
             }
         })
     }

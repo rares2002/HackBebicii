@@ -17,13 +17,14 @@ export class SubscriptionsController {
   }
 
   @Auth()
-  @Post('subscribe/:id')
+  @Post('subscribe/:id/:card')
   async subscribe(
     @Param('id') id: number,
-    @UserGuard() user: any
+    @UserGuard() user: any,
+    @Param('card') card: string
+
   ) {
-    console.log()
-    return this.subscriptionsService.subscribe(id, user)
+    return this.subscriptionsService.subscribe(id, user, card)
   }
 
   @Auth()
