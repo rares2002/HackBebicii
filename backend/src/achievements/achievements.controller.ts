@@ -18,7 +18,7 @@ export class AchievementsController {
     return this.achievementsService.findAll();
   }
 
-  @Get('my-achievements/')
+  @Get('my-achievements')
   findMy(@UserGuard() user: any) {
     return this.achievementsService.findMy(user);
   }

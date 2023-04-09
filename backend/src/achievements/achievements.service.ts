@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAchievementDto } from './dto/create-achievement.dto';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UserJwtPayload } from 'src/auth/guards/user.guard';
 @Injectable()
 export class AchievementsService {
   constructor(private readonly prisma: PrismaService) { }
@@ -18,10 +19,11 @@ export class AchievementsService {
     return this.prisma.achievement.findMany();
   }
 
-  findMy(id: number) {
+  findMy( user: UserJwtPayload) {
+    console.log(user)
     return this.prisma.achievementOnUser.findMany({
       where: {
-        user_id: id
+        user_id: user.id
       },
       include: {
         achievement: true

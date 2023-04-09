@@ -7,6 +7,7 @@ import Register from './pages/register/Register'
 import Logout from "./pages/Logout/Logout";
 import Forum from "./pages/forum/src/Forum";
 import Profile from "./pages/profile/Profile";
+import Contact from "./pages/contact/Contact";
 
 function App() {
   const [token, setToken] = useState("");
@@ -22,12 +23,13 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path='/expenses' exact element={<Home />}/>
+          <Route path='/' exact element={<Home />}/>
           {!token && <Route path='/login' element={<Login />}/>}
           {!token && <Route path='/register' element={<Register />} />}
           {token && <Route path='/logout' element={<Logout />} />}
           {token && <Route path="/forum" element={<Forum />} />}
-          {token && <Route path="/profile" element={<Profile />} />}
+        {token && <Route path="/profile" element={<Profile />} />}
+        <Route path='/About' element={<Contact />} />
         </Routes>
       </BrowserRouter>
   );

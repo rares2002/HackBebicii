@@ -41,7 +41,7 @@ function Milica() {
         console.log(responses)
     }
     return (
-        <div className='h-[92vh] relative flex flex-col items-center justify-between bg-gray-600'>
+        <div className='h-max-height pt-10 relative flex flex-col items-center justify-between bg-gray-600'>
             <h1 class="text-5xl md:text-6xl xl:text-7xl text-gray-300 font-bold tracking-tight ">Try Milica <br /><span class="text-gray-100">Your finance help bot</span></h1>
             <div className='w-[70vw] mt-[20vh]' ref={questionsRef}>
                 {/* {
@@ -83,7 +83,7 @@ function Milica() {
                         </>
                     )
                 }
-                <form className='flex mt-[10vh] flex-col justify-center items-center px-6  md:px-12' onSubmit={handleSubmit}>
+                <form className='flex mt-[10vh] mb-5 flex-col justify-center items-center px-6  md:px-12' onSubmit={handleSubmit}>
                     <label for="chat" class="sr-only">Ask him something about money</label>
                     <div class="w-[80%] flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700" id="mihau">
                         <input onChange={handleQuestion} value={question} id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ask him something about money..."></input>
