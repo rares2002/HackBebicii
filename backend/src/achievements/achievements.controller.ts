@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AchievementsService } from './achievements.service';
 import { CreateAchievementDto } from './dto/create-achievement.dto';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
 import { UserGuard } from 'src/auth/guards/user.guard';
 
 @Controller('achievements')
@@ -19,7 +20,9 @@ export class AchievementsController {
   }
 
   @Get('my-achievements')
+  @Auth()
   findMy(@UserGuard() user: any) {
+    console.log(user)
     return this.achievementsService.findMy(user);
   }
 

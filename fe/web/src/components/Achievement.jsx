@@ -1,26 +1,43 @@
 import Modal from './Modal'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { SimpleGrid, Card, CardHeader, CardBody, Heading, CardFooter } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
+import axios from 'axios'
 
-function Achievement(props) {
+function Achievement() {
+    const [achievements, setAchievements] = useState([])
+    const [show, setShow] = useState(false)
+    const fetchach = async () => {
+        console.log(localStorage.getItem('token'));
+        const response = await axios.get('http://localhost:3001/achievements/my-achievements', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        console.log(response)
+        setAchievements(response.data)
+    }
 
+    useEffect(() => {
+        fetchach();
+    }, [])
     return (
-        <ul class="w-full">
-            <li
-                class="w-full flex flex-row justify-between pr-[5vw] items-center border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
-                <p>Achievement 1</p>
-                <Modal />
-            </li>
-            <li
-                class="w-full flex flex-row justify-between pr-[5vw] items-center border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
-                <p>Achievement 2</p>
-                <Modal />
-            </li>
-            <li
-                class="w-full flex flex-row justify-between pr-[5vw] items-center border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
-                <p>Achievement 3</p>
-                <Modal />
-            </li>
-        </ul>
+        <>
+            {achievements.map((achievement) => (
+                <SimpleGrid columns={3} spacing={10}>
+                    <Card>
+                        <CardHeader>
+                            <Heading size='md'>{achievement.achievement.name}</Heading>
+                        </CardHeader>
+                        <CardFooter>
+                            <Modal show={show} setShowModal={setShow} title={achievement.achievement.name} description={achievement.achievement.reward}></Modal>
+                            <Button onClick={() => setShow(true)}>View here</Button>
+                        </CardFooter>
+                    </Card>
+                </SimpleGrid>
+            ))
+            }
+        </>
     )
 }
 

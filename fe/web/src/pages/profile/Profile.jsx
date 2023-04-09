@@ -22,7 +22,7 @@ function Profile() {
     }, [])
 
     return (
-        <div class="h-screen w-screen flex items-center justify-center bg-gradient-to-l from-[#06ef68] from-40% to-[#3758d1] to-100%">
+        <div class="h-screen w-screen pt-20 flex items-center justify-center bg-gradient-to-l from-[#06ef68] from-40% to-[#3758d1] to-100%">
             <Navbar />
             <div class="w-screen flex flex-row justify-between items-start ">
                 {/* PROFILE COMPONENT */}
