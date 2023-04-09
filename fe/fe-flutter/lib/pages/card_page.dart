@@ -98,8 +98,8 @@ class _CardPageState extends State<CardPage> {
                     children: [
                       // Flexible(
                         // child:
-                         Container(
-                          width: size.width / 2,
+                        Container(
+                          width: size.width,
                           height: 55,
                           decoration: BoxDecoration(
                               border: Border(
@@ -118,24 +118,7 @@ class _CardPageState extends State<CardPage> {
                       // ),
                       // Flexible(
                         // child:
-                         Container(
-                          width: size.width / 2,
-                          height: 55,
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: black.withOpacity(0.05),
-                                      width: 1))),
-                          child: Center(
-                            child: Text(
-                              "History",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: primary.withOpacity(0.5),
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
+                         
                       // ),
                     ],
                   ),

@@ -1,7 +1,6 @@
-
-import 'package:banking_app/utils/Chatgpt.dart';
-import 'package:banking_app/utils/Config.dart';
-import 'package:banking_app/utils/Utils.dart';
+import 'package:banking_app/pages/chatGPT/utils/Chatgpt.dart';
+import 'package:banking_app/pages/chatGPT/utils/Config.dart';
+import 'package:banking_app/pages/chatGPT/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -18,8 +17,10 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   bool isCopying = false;
-  final TextEditingController _keyTextEditingController = TextEditingController();
-  final TextEditingController _urlTextEditingController = TextEditingController();
+  final TextEditingController _keyTextEditingController =
+      TextEditingController();
+  final TextEditingController _urlTextEditingController =
+      TextEditingController();
 
   @override
   void initState() {
@@ -108,14 +109,15 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     32,
                     'Privacy Policy',
                     () {
-                      final Uri url = Uri.parse('https://wewehao.github.io/Privacy/privacy.html');
+                      final Uri url = Uri.parse(
+                          'https://wewehao.github.io/Privacy/privacy.html');
                       Utils.launchURL(url);
                     },
                   ),
                   // renderItemWidget('images/share_icon.png', Colors.green, 26, 'Share App', () {
                   //   Share.share(
                   //     Platform.isAndroid
-                  //         ? 'https://play.google.com/store/apps/details?id=com.wewehao.aichat'
+                  //         ? 'https://play.google.com/store/apps/details?id=com.wewehao.banking_app'
                   //         : "https://apps.apple.com/app/id***",
                   //   );
                   // },),
@@ -159,7 +161,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                           commentHint: 'Set your custom comment hint',
                           onCancelled: () => print('cancelled'),
                           onSubmitted: (response) {
-                            print('rating: ${response.rating}, comment: ${response.comment}');
+                            print(
+                                'rating: ${response.rating}, comment: ${response.comment}');
                           },
                         ),
                       );
@@ -174,12 +177,14 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       String recipientEmail = Config.contactEmail;
                       String subject = "${Config.appName} - feedback";
                       const String body = '';
-                      final url = 'mailto:$recipientEmail?subject=$subject&body=$body';
+                      final url =
+                          'mailto:$recipientEmail?subject=$subject&body=$body';
                       Utils.launchURL(
                         Uri.parse(url),
                         mode: LaunchMode.externalApplication,
                         onLaunchFail: () {
-                          Clipboard.setData(ClipboardData(text: recipientEmail));
+                          Clipboard.setData(
+                              ClipboardData(text: recipientEmail));
                           EasyLoading.showToast(
                             'Email address has been copied',
                             dismissOnTap: true,
@@ -248,7 +253,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 18, bottom: 10),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 18, bottom: 10),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(width: 1, color: Colors.white),
@@ -283,7 +289,10 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
                 if (rightIconSrc != '')
@@ -324,7 +333,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
               TextField(
                 controller: _keyTextEditingController,
                 autofocus: true,
-                decoration: const InputDecoration(hintText: 'Please input your key'),
+                decoration:
+                    const InputDecoration(hintText: 'Please input your key'),
               ),
               const SizedBox(height: 12),
               GestureDetector(
@@ -447,7 +457,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
               TextField(
                 controller: _urlTextEditingController,
                 autofocus: true,
-                decoration: const InputDecoration(hintText: 'Please input your OpenAI host'),
+                decoration: const InputDecoration(
+                    hintText: 'Please input your OpenAI host'),
               ),
               const SizedBox(height: 12),
               Wrap(
@@ -489,7 +500,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () async {
-                ChatGPT.setOpenAIBaseUrl(_urlTextEditingController.text).then((_) {
+                ChatGPT.setOpenAIBaseUrl(_urlTextEditingController.text)
+                    .then((_) {
                   _urlTextEditingController.clear();
                   Navigator.of(context).pop(true);
                   EasyLoading.showToast(

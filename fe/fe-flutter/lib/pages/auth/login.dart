@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
         (value) => {password = value},
       ),
       const SizedBox(
-        height: 50,
+        height: 20,
       ),
       createAuthButton(
         context,
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
         height: 50,
       ),
       createLinkBlockButton(
-          context, '', "Dont't have an account yet? Register here"),
+          context, '/register', "Dont't have an account yet? Register here"),
     ], context);
   }
 }

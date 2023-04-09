@@ -75,7 +75,7 @@ class _AddCardPageState extends State<AddCardPage> {
                   front: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: buildCreditCard(
-                      color: kDarkBlue,
+                      color: primary,
                       cardExpiration: cardExpiryDateController.text.isEmpty
                           ? "08/2022"
                           : cardExpiryDateController.text,
@@ -341,7 +341,7 @@ class _AddCardPageState extends State<AddCardPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.deepPurpleAccent,
+                  backgroundColor: primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),

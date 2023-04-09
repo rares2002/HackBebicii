@@ -70,9 +70,7 @@ class RegisterPageState extends State<RegisterPage> {
 
       Text('Create Account',
           style: getTheme().getTextStyle(40, 900, false, Colors.white)),
-      const SizedBox(
-        height: 20,
-      ),
+    
       createInputForm(
         node,
         false,
@@ -118,7 +116,7 @@ class RegisterPageState extends State<RegisterPage> {
         (value) => {confirmPassword = value},
       ),
       const SizedBox(
-        height: 20,
+        height: 10,
       ),
 
       createAuthButton(

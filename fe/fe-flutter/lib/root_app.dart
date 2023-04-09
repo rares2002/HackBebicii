@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:banking_app/pages/add_page.dart';
+import 'package:banking_app/pages/card_page.dart';
 import 'package:banking_app/pages/dashboard_page.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +9,15 @@ import 'package:banking_app/pages/card_flip.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 
-import 'package:banking_app/utils/Chatgpt.dart';
-import 'package:banking_app/utils/Config.dart';
-import 'package:banking_app/utils/Time.dart';
-import 'package:banking_app/utils/Utils.dart';
+import 'package:banking_app/pages/chatGPT/utils/Chatgpt.dart';
+import 'package:banking_app/pages/chatGPT/utils/Config.dart';
+import 'package:banking_app/pages/chatGPT/utils/Time.dart';
+import 'package:banking_app/pages/chatGPT/utils/Utils.dart';
+import 'package:banking_app/pages/chatGPT/HomePage.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
-
+  
   @override
   State<RootApp> createState() => _RootAppState();
 }
@@ -23,7 +25,6 @@ class RootApp extends StatefulWidget {
 class _RootAppState extends State<RootApp> {
   int pageIndex = 0;
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: white,
@@ -104,8 +105,17 @@ class _RootAppState extends State<RootApp> {
   }
 
   selectedTab(index) {
-    if (index == 3){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => CardFlip()));
+    if (index == 3) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CardFlip()));
+    }
+    if (index == 4) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CardPage()));
+    }
+    if (index == 1) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
     setState(() {
       pageIndex = index;

@@ -1,11 +1,11 @@
 import 'package:banking_app/data_json/balance_json.dart';
-import 'package:banking_app/pages/SettingPage.dart';
+import 'package:banking_app/pages/chatGPT/SettingPage.dart';
 import 'package:banking_app/pages/add_page.dart';
 import 'package:banking_app/pages/card_page.dart';
 import 'package:banking_app/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:banking_app/pages/SettingPage.dart';
+import 'package:banking_app/pages/chatGPT/SettingPage.dart';
 import 'package:banking_app/models/user.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _DashbaordPageState extends State<DashboardPage> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SettingPage()));
             },
-            icon: Icon(AntDesign.search1))
+            icon: Icon(Icons.more_vert))
       ],
     );
   }
@@ -64,64 +64,61 @@ class _DashbaordPageState extends State<DashboardPage> {
               Container(
                 width: double.infinity,
                 height: 110,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(balanceLists.length, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Container(
-                          width: size.width * 0.7,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5),
-                                    child: Text(
-                                      balanceLists[index]['currency'],
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          color: index == 0
-                                              ? white
-                                              : white.withOpacity(0.5),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    balanceLists[index]['amount'],
+                child: Row(
+                  children: List.generate(balanceLists.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Container(
+                        width: size.width -20 ,
+                        child: Column(
+                          // crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    balanceLists[index]['currency'],
                                     style: TextStyle(
-                                        fontSize: 35,
+                                        fontSize: 17,
                                         color: index == 0
                                             ? white
                                             : white.withOpacity(0.5),
                                         fontWeight: FontWeight.bold),
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                balanceLists[index]['description'],
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: white.withOpacity(0.5),
                                 ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  balanceLists[index]['amount'],
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: index == 0
+                                          ? white
+                                          : white.withOpacity(0.5),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              balanceLists[index]['description'],
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: white.withOpacity(0.5),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      );
-                    }),
-                  ),
+                      ),
+                    );
+                  }),
                 ),
               ),
               Expanded(
@@ -135,7 +132,7 @@ class _DashbaordPageState extends State<DashboardPage> {
                       TextButton(
                         style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
-                            fixedSize: Size(200, 200)),
+                            fixedSize: Size(340 , size.height)),
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -144,7 +141,7 @@ class _DashbaordPageState extends State<DashboardPage> {
                         child:
                             // Flexible(
                             // child:
-                            Container(
+                          Container(
                           height: 50,
                           decoration: BoxDecoration(
                               color: secondary.withOpacity(0.3),
@@ -162,21 +159,7 @@ class _DashbaordPageState extends State<DashboardPage> {
                       SizedBox(
                         width: 15,
                       ),
-                      Flexible(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: secondary.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                            child: Text(
-                              "Exchange",
-                              style: TextStyle(
-                                  color: white, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
-                      ),
+                      
                       const SizedBox(
                         width: 15,
                       ),
@@ -211,7 +194,7 @@ class _DashbaordPageState extends State<DashboardPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Transactions",
+            "Your portofolio",
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
           ),
           SizedBox(
@@ -359,40 +342,13 @@ class _DashbaordPageState extends State<DashboardPage> {
                 "Cards",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
-              Container(
-                width: 90,
-                height: 22,
-                decoration: BoxDecoration(
-                    color: secondary.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Ionicons.ios_add,
-                      size: 16,
-                      color: primary,
-                    ),
-                    Text(
-                      "ADD CARD",
-                      style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: primary),
-                    )
-                  ],
-                ),
-              )
+              
             ],
           ),
           SizedBox(
             height: 15,
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => CardPage()));
-            },
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(

@@ -2,8 +2,8 @@ import 'package:banking_app/pages/card_flip.dart';
 import 'package:banking_app/widgets/widgets_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:banking_app/widgets/flip_layout.dart';
-
-class CardFlip extends StatefulWidget {
+import '../theme/color.dart';
+import '../theme/color.dart';class CardFlip extends StatefulWidget {
   CardFlip({Key? key}) : super(key: key);
 
   @override
@@ -15,6 +15,7 @@ class _CardFlipState extends State<CardFlip> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: primary,
         title: const Text('Achievements'),
         centerTitle: true,
       ),

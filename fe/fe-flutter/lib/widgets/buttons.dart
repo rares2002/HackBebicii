@@ -49,7 +49,9 @@ Widget createAuthButton(context, String path, String caption, Function() action,
 
 Widget createLinkBlockButton(context, String path, String caption) {
   return TextButton(
-    onPressed: () {},
+    onPressed: () {
+      Navigator.pushNamed(context, path);
+    },
     style: TextButton.styleFrom(padding: EdgeInsets.zero),
     child: Text(
       caption,
