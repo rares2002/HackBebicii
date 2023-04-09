@@ -7,13 +7,11 @@ import { UserGuard } from 'src/auth/guards/user.guard';
 
 @Controller('subscriptions')
 export class SubscriptionsController {
-  constructor(private readonly subscriptionsService: SubscriptionsService) { }
-  
+  constructor(private readonly subscriptionsService: SubscriptionsService) {}
+
   @Post('create')
-  async create(
-    @Body() createSubscriptionDto: CreateSubscriptionDto,
-  ) {
-    return this.subscriptionsService.create(createSubscriptionDto)
+  async create(@Body() createSubscriptionDto: CreateSubscriptionDto) {
+    return this.subscriptionsService.create(createSubscriptionDto);
   }
 
   @Auth()
@@ -21,31 +19,25 @@ export class SubscriptionsController {
   async subscribe(
     @Param('id') id: number,
     @UserGuard() user: any,
-    @Body() card: any
+    @Body() card: any,
   ) {
-    return this.subscriptionsService.subscribe(id, user, card.card)
+    return this.subscriptionsService.subscribe(id, user, card.card);
   }
 
   @Auth()
   @Get('my-subscriptions')
-  async mySubscriptions(
-    @UserGuard() user: any
-  ) {
-    return this.subscriptionsService.mySubscriptions(user)
+  async mySubscriptions(@UserGuard() user: any) {
+    return this.subscriptionsService.mySubscriptions(user);
   }
 
   @Get('all-subscriptions')
   async allSubscriptions() {
-    return this.subscriptionsService.allSubscriptions()
+    return this.subscriptionsService.allSubscriptions();
   }
 
   @Auth()
   @Post('unsubscribe/:id')
-  async unsubscribe(
-    @Param('id') id: number,
-    @UserGuard() user: any
-  ) {
-    return this.subscriptionsService.unsubscribe(id, user)
+  async unsubscribe(@Param('id') id: number, @UserGuard() user: any) {
+    return this.subscriptionsService.unsubscribe(id, user);
   }
-
 }
