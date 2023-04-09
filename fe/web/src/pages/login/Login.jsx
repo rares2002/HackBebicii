@@ -22,7 +22,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let res = await axios.post("http://127.0.0.1:3001/auth/login", {
+        let res = await axios.post("http://localhost:3001/auth/login", {
             email: email,
             password: password
         })
@@ -37,7 +37,7 @@ function Login() {
     return (
         <div> 
             <Navbar />
-            <section className="h-screen bg-gradient-to-l from-[#06ef68] from-0% to-[#3758d1]">
+            <section className="h-screen text-black bg-gradient-to-l from-[#06ef68] from-0% to-[#3758d1]">
                 <div className="h-full">
                     {/* <!-- Left column container with background--> */}
                     <div

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import GoBack from "../GoBack";
 import GridLayout from "../GridLayout";
 import Loading from "../Loading";
-import Navbar from "../Navbar";
+import Navbar from "../../../../../components/Navbar";
 import PostCard from "../PostCard";
 import Sidebar from "../Sidebar";
 import { useParams } from "react-router-dom";

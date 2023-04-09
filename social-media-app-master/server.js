@@ -41,7 +41,6 @@ app.use(cors());
 app.use("/api/posts", posts);
 app.use("/api/users", users);
 app.use("/api/comments", comments);
-app.use("/api/messages", messages);
 
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));

@@ -12,11 +12,11 @@ import GoBack from "../GoBack";
 import GridLayout from "../GridLayout";
 import Loading from "../Loading";
 import MobileProfile from "../MobileProfile";
-import Navbar from "../Navbar";
+import Navbar from "../../../../../components/Navbar";
 import PostBrowser from "../PostBrowser";
 import Profile from "../Profile";
 import ProfileTabs from "../ProfileTabs";
-
+import '../../../../../App.css'
 const ProfileView = () => {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
@@ -93,6 +93,7 @@ const ProfileView = () => {
   }
 
   return (
+    <div className="app">
     <Container>
       <Navbar />
 
@@ -137,7 +138,8 @@ const ProfileView = () => {
           </Stack>
         }
       />
-    </Container>
+      </Container>
+  </div>
   );
 };
 

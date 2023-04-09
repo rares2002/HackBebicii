@@ -59,7 +59,7 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/search?" + new URLSearchParams({ search }));
+    navigate("/forum/search?" + new URLSearchParams({ search }));
   };
 
   const handleSearchIcon = (e) => {
@@ -90,9 +90,9 @@ const Navbar = () => {
             mr={1}
             color={theme.palette.primary.main}
           >
-            {/* <Link to="/" color="inherit"> */}
-              PostIt
-            {/* </Link> */}
+            <Link to="/" color="inherit">
+              Fix Your Budget Forum
+            </Link>
           </Typography>
         </HorizontalStack>
 
@@ -123,19 +123,13 @@ const Navbar = () => {
               <IconButton component={Link} to={"/messenger"}>
                 <AiFillMessage />
               </IconButton>
-              <IconButton component={Link}  to={"/users/" + username}>
+              <IconButton component={Link}  to={"/forum/users/" + username}>
                 <UserAvatar width={30} height={30} username={user.username} />
               </IconButton>
               <Button onClick={handleLogout}>Logout</Button>
             </>
           ) : (
             <>
-              <Button variant="text" sx={{ minWidth: 80 }} href="/signup">
-                Sign Up
-              </Button>
-              <Button variant="text" sx={{ minWidth: 65 }} href="/login">
-                Login
-              </Button>
             </>
           )}
         </HorizontalStack>

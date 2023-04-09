@@ -26,15 +26,6 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minLength: [8, "Must be at least 8 characters long"],
     },
-    biography: {
-      type: String,
-      default: "",
-      maxLength: [250, "Must be at most 250 characters long"],
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );

@@ -6,7 +6,7 @@ import { isLoggedIn } from "../../helpers/authHelper";
 import CreatePost from "../CreatePost";
 import GridLayout from "../GridLayout";
 import Loading from "../Loading";
-import Navbar from "../Navbar";
+import Navbar from "../../../../../components/Navbar";
 import SortBySelect from "../SortBySelect";
 import PostCard from "../PostCard";
 import Sidebar from "../Sidebar";
