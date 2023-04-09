@@ -16,7 +16,6 @@ import SearchView from "./pages/forum/src/components/views/SearchView";
 import Subscriptions from "./pages/subscriptions/subscriptions";
 import theme from "./pages/forum/src/theme";
 import './App.css'; 
-import { BsSubscript } from "react-icons/bs";
 
 
 function App() {
