@@ -35,6 +35,11 @@ export class SubscriptionsController {
     return this.subscriptionsService.mySubscriptions(user)
   }
 
+  @Get('all-subscriptions')
+  async allSubscriptions() {
+    return this.subscriptionsService.allSubscriptions()
+  }
+
   @Auth()
   @Post('unsubscribe/:id')
   async unsubscribe(

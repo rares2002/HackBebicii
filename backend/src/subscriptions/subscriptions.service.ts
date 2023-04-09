@@ -44,4 +44,12 @@ export class SubscriptionsService {
             }
         })
     }
+    allSubscriptions() {
+        return this.prisma.subscription.findMany({
+            include: {
+                user: true
+            }
+        })
+    }
+
 }

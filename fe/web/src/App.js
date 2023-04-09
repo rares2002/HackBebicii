@@ -13,8 +13,10 @@ import ProfileView from "./pages/forum/src/components/views/ProfileView";
 import ExploreView from "./pages/forum/src/components/views/ExploreView";
 import PrivateRoute from "./pages/forum/src/components/PrivateRoute";
 import SearchView from "./pages/forum/src/components/views/SearchView";
+import Subscriptions from "./pages/subscriptions/subscriptions";
 import theme from "./pages/forum/src/theme";
 import './App.css'; 
+import { BsSubscript } from "react-icons/bs";
 
 
 function App() {
@@ -40,6 +42,7 @@ function App() {
             {token && <Route path='/logout' element={<Logout />} />}
             {token && <Route path="/forum" element={<ProfileView />} />}
             {token && <Route path="/profile" element={<Profile />} />}
+            {token && <Route path="/subscriptions" element={<Subscriptions />}/>}
             <Route path="/forum" element={<ExploreView />} />
             <Route path="/forum/posts/:id" element={<PostView />} />
             <Route
